@@ -30,12 +30,21 @@ const Settings = () => {
 
   const applyAppearanceSettings = () => {
     const root = document.documentElement;
+    const body = document.body;
 
-    // Apply theme to html element (root) instead of body
+    // Force remove and add theme classes for reliable switching
+    root.classList.remove('light', 'dark');
+    body.classList.remove('light', 'dark');
+
+    // Apply theme to both html and body elements
     if (appearanceData.theme === 'Dark') {
       root.classList.add('dark');
+      body.classList.add('dark');
+      root.setAttribute('data-theme', 'dark');
     } else {
-      root.classList.remove('dark');
+      root.classList.add('light');
+      body.classList.add('light');
+      root.setAttribute('data-theme', 'light');
     }
 
     // Apply font
@@ -60,7 +69,7 @@ const Settings = () => {
         fontFamily = 'Inter, system-ui, -apple-system, sans-serif';
     }
     root.style.setProperty('--font-family', fontFamily);
-    document.body.style.fontFamily = fontFamily;
+    body.style.fontFamily = fontFamily;
 
     // Apply font size
     let fontSize = '16px';
@@ -79,7 +88,9 @@ const Settings = () => {
         break;
     }
     root.style.setProperty('--base-font-size', fontSize);
-    document.body.style.fontSize = fontSize;
+    body.style.fontSize = fontSize;
+
+    console.log(`Theme applied: ${appearanceData.theme}, Font: ${appearanceData.font}, Size: ${appearanceData.fontSize}`);
   };
 
   const handleAccountSave = () => {
@@ -94,6 +105,15 @@ const Settings = () => {
     // Apply the settings immediately
     applyAppearanceSettings();
 
+    // Force re-render by triggering multiple applications
+    setTimeout(() => {
+      applyAppearanceSettings();
+    }, 50);
+
+    setTimeout(() => {
+      applyAppearanceSettings();
+    }, 100);
+
     // Dispatch custom event to notify other components
     window.dispatchEvent(new CustomEvent('themeChanged', {
       detail: {
@@ -103,12 +123,17 @@ const Settings = () => {
       }
     }));
 
-    // Force multiple re-applications to ensure theme takes effect
-    setTimeout(() => {
-      applyAppearanceSettings();
-      // Force a page refresh for immediate effect
-      window.location.reload();
-    }, 200);
+    // Show user feedback
+    const button = document.querySelector('button[data-action="save-appearance"]');
+    if (button) {
+      const originalText = button.textContent;
+      button.textContent = 'Applied!';
+      button.classList.add('bg-green-500');
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.classList.remove('bg-green-500');
+      }, 2000);
+    }
 
     console.log('Appearance settings saved and applied:', appearanceData);
   };
@@ -322,10 +347,20 @@ const Settings = () => {
                           const newAppearanceData = { ...appearanceData, theme: e.target.value };
                           setAppearanceData(newAppearanceData);
                           // Apply theme immediately for real-time feedback
+                          const root = document.documentElement;
+                          const body = document.body;
+
+                          root.classList.remove('light', 'dark');
+                          body.classList.remove('light', 'dark');
+
                           if (e.target.value === 'Dark') {
-                            document.documentElement.classList.add('dark');
+                            root.classList.add('dark');
+                            body.classList.add('dark');
+                            root.setAttribute('data-theme', 'dark');
                           } else {
-                            document.documentElement.classList.remove('dark');
+                            root.classList.add('light');
+                            body.classList.add('light');
+                            root.setAttribute('data-theme', 'light');
                           }
                         }}
                         className="w-4 h-4 text-medical-blue border-border focus:ring-medical-blue"
@@ -366,6 +401,7 @@ const Settings = () => {
               {/* Save Button */}
               <button
                 onClick={handleAppearanceSave}
+                data-action="save-appearance"
                 className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-6 py-2 rounded-lg font-medium transition-all flex items-center space-x-2 shadow-lg hover:shadow-xl"
               >
                 <Save className="w-4 h-4" />
