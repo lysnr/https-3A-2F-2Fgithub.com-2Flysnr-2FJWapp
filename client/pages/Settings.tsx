@@ -23,10 +23,7 @@ const Settings = () => {
     { id: 'appearance' as const, label: 'Appearance', icon: Palette },
   ];
 
-  // Apply appearance settings on mount and when appearance data changes
-  useEffect(() => {
-    applyAppearanceSettings();
-  }, [appearanceData]);
+  // Theme will only be applied when "Update Appearance" button is clicked
 
   // Initialize theme on component mount
   useEffect(() => {
