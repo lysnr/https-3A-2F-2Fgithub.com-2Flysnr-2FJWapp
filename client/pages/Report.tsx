@@ -596,13 +596,13 @@ const Report = () => {
             <div className="space-y-4">
               {/* MRI Image Display Card with Embedded Scrollbar */}
               <div
-                className="bg-white border-4 border-gray-400 rounded-lg shadow-lg p-6 relative"
+                className="bg-white border-4 border-gray-400 rounded-lg shadow-lg p-4 relative"
                 style={{
                   boxShadow:
                     "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
                   outline: "2px solid #3b82f6",
                   outlineOffset: "2px",
-                  height: "500px",
+                  height: "420px",
                 }}
               >
                 {/* DICOM Image Area - Fixed container */}
