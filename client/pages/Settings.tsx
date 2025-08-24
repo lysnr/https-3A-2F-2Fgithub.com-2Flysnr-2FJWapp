@@ -371,22 +371,7 @@ const Settings = () => {
                         onChange={(e) => {
                           const newAppearanceData = { ...appearanceData, theme: e.target.value };
                           setAppearanceData(newAppearanceData);
-                          // Apply theme immediately for real-time feedback
-                          const root = document.documentElement;
-                          const body = document.body;
-
-                          root.classList.remove('light', 'dark');
-                          body.classList.remove('light', 'dark');
-
-                          if (e.target.value === 'Dark') {
-                            root.classList.add('dark');
-                            body.classList.add('dark');
-                            root.setAttribute('data-theme', 'dark');
-                          } else {
-                            root.classList.add('light');
-                            body.classList.add('light');
-                            root.setAttribute('data-theme', 'light');
-                          }
+                          // Theme will only change when "Update Appearance" button is clicked
                         }}
                         className="w-4 h-4 text-medical-blue border-border focus:ring-medical-blue"
                       />
