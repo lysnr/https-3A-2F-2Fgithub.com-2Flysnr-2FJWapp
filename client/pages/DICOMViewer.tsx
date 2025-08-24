@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { FileText, Save, Menu, Settings as SettingsIcon, ChevronLeft } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const DICOMViewer = () => {
   const navigate = useNavigate();
+  const { studyId } = useParams();
   const [patientNotes, setPatientNotes] = useState('');
 
   // DICOM view types
