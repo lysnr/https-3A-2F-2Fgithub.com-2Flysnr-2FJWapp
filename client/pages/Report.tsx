@@ -592,7 +592,7 @@ const Report = () => {
           className={`flex flex-col gap-6 ${showMetadata ? "pr-80" : ""} transition-all duration-300`}
         >
           {/* MRI Display Card */}
-          <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
+          <div className="bg-card border border-border rounded-lg p-4 lg:p-6 shadow-sm max-w-full">
             <div className="space-y-4">
               {/* MRI Image Display Card with Embedded Scrollbar */}
               <div
