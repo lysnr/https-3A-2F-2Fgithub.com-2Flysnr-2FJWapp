@@ -596,22 +596,23 @@ const Report = () => {
             <div className="space-y-4">
               {/* MRI Image Display Card with Embedded Scrollbar */}
               <div
-                className="bg-white border-4 border-gray-400 rounded-lg shadow-lg p-4 relative"
+                className="bg-white border-4 border-gray-400 rounded-lg shadow-lg p-3 relative"
                 style={{
                   boxShadow:
                     "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
                   outline: "2px solid #3b82f6",
                   outlineOffset: "2px",
-                  height: "420px",
+                  minHeight: "350px",
+                  height: "min(420px, 70vh)",
                 }}
               >
-                {/* DICOM Image Area - Fixed container */}
-                <div className="absolute inset-3 flex items-center justify-center">
-                  <div className="relative w-full h-full max-w-80 max-h-80">
+                {/* DICOM Image Area - Responsive container */}
+                <div className="absolute inset-2 flex items-center justify-center">
+                  <div className="relative w-full h-full max-w-xs max-h-xs aspect-square">
                     {/* Fixed DICOM Image */}
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
                       <div className="text-center">
-                        {/* MRI Image Placeholder - Fixed Position with Zoom and Rotation */}
+                        {/* MRI Image Placeholder - Responsive with Zoom and Rotation */}
                         <div
                           className="w-full h-full bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg flex items-center justify-center border border-border shadow-inner transition-transform duration-300"
                           style={{
@@ -620,19 +621,19 @@ const Report = () => {
                             transformOrigin: "center",
                           }}
                         >
-                          <div className="text-center text-white">
-                            <div className="text-2xl font-mono mb-2">
+                          <div className="text-center text-white p-2">
+                            <div className="text-lg sm:text-xl lg:text-2xl font-mono mb-2">
                               MRI Slice {currentSlice}
                             </div>
-                            <div className="w-32 h-32 bg-slate-700 rounded-full mx-auto flex items-center justify-center">
+                            <div className="w-16 h-16 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-slate-700 rounded-full mx-auto flex items-center justify-center">
                               <div className="text-xs opacity-75">
                                 DICOM Image
                               </div>
                             </div>
-                            <div className="text-xs mt-4 opacity-60">
+                            <div className="text-xs mt-2 sm:mt-4 opacity-60">
                               Slice {currentSlice} of {totalSlices}
                             </div>
-                            <div className="text-xs mt-2 opacity-40">
+                            <div className="text-xs mt-1 sm:mt-2 opacity-40">
                               Zoom: {(zoomLevel * 100).toFixed(0)}%
                             </div>
                           </div>
