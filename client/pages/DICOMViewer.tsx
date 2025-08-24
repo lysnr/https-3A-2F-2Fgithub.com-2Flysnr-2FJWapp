@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
-import { FileText, Save, Menu, Settings as SettingsIcon, ChevronLeft } from 'lucide-react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState } from "react";
+import {
+  FileText,
+  Save,
+  Menu,
+  Settings as SettingsIcon,
+  ChevronLeft,
+} from "lucide-react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const DICOMViewer = () => {
   const navigate = useNavigate();
   const { studyId } = useParams();
-  const [patientNotes, setPatientNotes] = useState('');
+  const [patientNotes, setPatientNotes] = useState("");
 
   // DICOM view types
   const viewTypes = [
-    { id: 'axial', label: 'AXIAL' },
-    { id: 'sagittal', label: 'SAGITTAL' },
-    { id: 'coronal', label: 'CORONAL' },
-    { id: '3d', label: '3D RECONSTRUCTION' },
+    { id: "axial", label: "AXIAL" },
+    { id: "sagittal", label: "SAGITTAL" },
+    { id: "coronal", label: "CORONAL" },
+    { id: "3d", label: "3D RECONSTRUCTION" },
   ];
 
   return (
@@ -28,25 +34,27 @@ const DICOMViewer = () => {
                 if (window.history.length > 1) {
                   navigate(-1);
                 } else {
-                  navigate('/patient-record');
+                  navigate("/patient-record");
                 }
               }}
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
-            <h1 className="text-xl font-semibold text-foreground">DICOM Viewer</h1>
+            <h1 className="text-xl font-semibold text-foreground">
+              DICOM Viewer
+            </h1>
           </div>
           <div className="flex items-center space-x-4">
             <button
-              onClick={() => console.log('File menu clicked')}
+              onClick={() => console.log("File menu clicked")}
               className="flex items-center space-x-2 px-4 py-2 bg-muted hover:bg-muted/80 text-foreground rounded-lg transition-colors"
             >
               <FileText className="w-4 h-4" />
               <span>File</span>
             </button>
             <button
-              onClick={() => console.log('Tools menu clicked')}
+              onClick={() => console.log("Tools menu clicked")}
               className="flex items-center space-x-2 px-4 py-2 bg-muted hover:bg-muted/80 text-foreground rounded-lg transition-colors"
             >
               <Menu className="w-4 h-4" />
@@ -59,8 +67,12 @@ const DICOMViewer = () => {
         <div className="bg-muted/50 p-4 border-b border-border">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-semibold text-foreground">Jane Smith</h2>
-              <p className="text-sm text-muted-foreground">Study Date: October 25, 2023</p>
+              <h2 className="text-lg font-semibold text-foreground">
+                Jane Smith
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                Study Date: October 25, 2023
+              </p>
             </div>
           </div>
         </div>
@@ -71,7 +83,9 @@ const DICOMViewer = () => {
             {viewTypes.map((view) => (
               <div key={view.id} className="medical-card p-4 flex flex-col">
                 <div className="text-center mb-3">
-                  <h3 className="text-sm font-semibold text-muted-foreground">{view.label}</h3>
+                  <h3 className="text-sm font-semibold text-muted-foreground">
+                    {view.label}
+                  </h3>
                 </div>
                 <div className="flex-1 bg-muted rounded-lg flex items-center justify-center">
                   {/* DICOM Image Placeholder */}
@@ -88,10 +102,14 @@ const DICOMViewer = () => {
       {/* Right Sidebar - Patient Notes */}
       <div className="w-80 bg-card border-l border-border flex flex-col">
         <div className="p-4 border-b border-border">
-          <h3 className="text-lg font-semibold text-foreground">Patient Notes</h3>
-          <p className="text-sm text-muted-foreground">Observations and notes for Jane Smith.</p>
+          <h3 className="text-lg font-semibold text-foreground">
+            Patient Notes
+          </h3>
+          <p className="text-sm text-muted-foreground">
+            Observations and notes for Jane Smith.
+          </p>
         </div>
-        
+
         <div className="flex-1 p-4">
           <textarea
             value={patientNotes}
@@ -103,7 +121,7 @@ const DICOMViewer = () => {
 
         <div className="p-4 border-t border-border">
           <button
-            onClick={() => console.log('Saving notes:', patientNotes)}
+            onClick={() => console.log("Saving notes:", patientNotes)}
             className="w-full bg-medical-blue hover:bg-medical-blue-dark text-white py-3 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
           >
             <Save className="w-4 h-4" />

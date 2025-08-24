@@ -29,18 +29,18 @@ const App = () => {
   // Initialize theme on app startup and listen for changes
   useEffect(() => {
     const applyTheme = () => {
-      const savedSettings = localStorage.getItem('appearanceSettings');
+      const savedSettings = localStorage.getItem("appearanceSettings");
       if (savedSettings) {
         const settings = JSON.parse(savedSettings);
         // Apply saved theme
-        if (settings.theme === 'Dark') {
-          document.documentElement.classList.add('dark');
+        if (settings.theme === "Dark") {
+          document.documentElement.classList.add("dark");
         } else {
-          document.documentElement.classList.remove('dark');
+          document.documentElement.classList.remove("dark");
         }
       } else {
         // Default to light theme if no settings saved
-        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.remove("dark");
       }
     };
 
@@ -52,82 +52,132 @@ const App = () => {
       applyTheme();
     };
 
-    window.addEventListener('themeChanged', handleThemeChange);
+    window.addEventListener("themeChanged", handleThemeChange);
 
     return () => {
-      window.removeEventListener('themeChanged', handleThemeChange);
+      window.removeEventListener("themeChanged", handleThemeChange);
     };
   }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <AuthProvider>
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <AuthProvider>
+            <Routes>
+              {/* Public Routes */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
 
-            {/* Protected Routes */}
-            <Route path="/" element={
-              <ProtectedRoute>
-                <Layout><Dashboard /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/patient-record" element={
-              <ProtectedRoute>
-                <Layout><PatientRecord /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/file-folder/:patientId" element={
-              <ProtectedRoute>
-                <Layout><FileFolder /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/file-folder/:patientId/images" element={
-              <ProtectedRoute>
-                <Layout><Images /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/report/:studyId" element={
-              <ProtectedRoute>
-                <Layout><Report /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/upload-study" element={
-              <ProtectedRoute>
-                <Layout><UploadStudy /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/dicom-viewer" element={
-              <ProtectedRoute>
-                <Layout><DICOMViewer /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/dicom-viewer/:studyId" element={
-              <ProtectedRoute>
-                <Layout><DICOMViewer /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/settings" element={
-              <ProtectedRoute>
-                <Layout><Settings /></Layout>
-              </ProtectedRoute>
-            } />
+              {/* Protected Routes */}
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <Dashboard />
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/patient-record"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <PatientRecord />
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/file-folder/:patientId"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <FileFolder />
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/file-folder/:patientId/images"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <Images />
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/report/:studyId"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <Report />
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/upload-study"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <UploadStudy />
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dicom-viewer"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <DICOMViewer />
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dicom-viewer/:studyId"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <DICOMViewer />
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/settings"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <Settings />
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
 
-            {/* Catch-all route */}
-            <Route path="*" element={
-              <ProtectedRoute>
-                <Layout><NotFound /></Layout>
-              </ProtectedRoute>
-            } />
-          </Routes>
-        </AuthProvider>
-      </BrowserRouter>
-    </TooltipProvider>
+              {/* Catch-all route */}
+              <Route
+                path="*"
+                element={
+                  <ProtectedRoute>
+                    <Layout>
+                      <NotFound />
+                    </Layout>
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </AuthProvider>
+        </BrowserRouter>
+      </TooltipProvider>
     </QueryClientProvider>
   );
 };
