@@ -107,6 +107,11 @@ const App = () => {
                 <Layout><DICOMViewer /></Layout>
               </ProtectedRoute>
             } />
+            <Route path="/dicom-viewer/:studyId" element={
+              <ProtectedRoute>
+                <Layout><DICOMViewer /></Layout>
+              </ProtectedRoute>
+            } />
             <Route path="/settings" element={
               <ProtectedRoute>
                 <Layout><Settings /></Layout>
