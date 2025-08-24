@@ -145,17 +145,7 @@ const Settings = () => {
       }
     }));
 
-    // Show user feedback
-    const button = document.querySelector('button[data-action="save-appearance"]');
-    if (button) {
-      const originalText = button.textContent;
-      button.textContent = 'Applied!';
-      button.classList.add('bg-green-500');
-      setTimeout(() => {
-        button.textContent = originalText;
-        button.classList.remove('bg-green-500');
-      }, 2000);
-    }
+    // Settings applied successfully (no text change needed)
 
     console.log('Appearance settings saved and applied:', appearanceData);
   };
