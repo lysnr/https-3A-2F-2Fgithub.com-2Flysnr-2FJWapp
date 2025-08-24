@@ -1,26 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { User, Palette, Save, Camera, Upload } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { User, Palette, Save, Camera, Upload } from "lucide-react";
 
 const Settings = () => {
-  const [activeTab, setActiveTab] = useState<'account' | 'appearance'>('account');
+  const [activeTab, setActiveTab] = useState<"account" | "appearance">(
+    "account",
+  );
   const [accountData, setAccountData] = useState({
-    name: 'Dr. Smith',
-    email: 'dr.smith@joinwise.com'
+    name: "Dr. Smith",
+    email: "dr.smith@joinwise.com",
   });
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [appearanceData, setAppearanceData] = useState(() => {
     // Load saved appearance settings from localStorage
-    const saved = localStorage.getItem('appearanceSettings');
-    return saved ? JSON.parse(saved) : {
-      font: 'Inter',
-      fontSize: 'Medium',
-      theme: 'Light'
-    };
+    const saved = localStorage.getItem("appearanceSettings");
+    return saved
+      ? JSON.parse(saved)
+      : {
+          font: "Inter",
+          fontSize: "Medium",
+          theme: "Light",
+        };
   });
 
   const tabs = [
-    { id: 'account' as const, label: 'Account', icon: User },
-    { id: 'appearance' as const, label: 'Appearance', icon: Palette },
+    { id: "account" as const, label: "Account", icon: User },
+    { id: "appearance" as const, label: "Appearance", icon: Palette },
   ];
 
   // Theme will only be applied when "Update Appearance" button is clicked
@@ -28,24 +32,24 @@ const Settings = () => {
   // Initialize theme on component mount
   useEffect(() => {
     // Load saved settings and apply immediately
-    const saved = localStorage.getItem('appearanceSettings');
+    const saved = localStorage.getItem("appearanceSettings");
     if (saved) {
       const settings = JSON.parse(saved);
       // Apply theme immediately on load
       const root = document.documentElement;
       const body = document.body;
 
-      root.classList.remove('light', 'dark');
-      body.classList.remove('light', 'dark');
+      root.classList.remove("light", "dark");
+      body.classList.remove("light", "dark");
 
-      if (settings.theme === 'Dark') {
-        root.classList.add('dark');
-        body.classList.add('dark');
-        root.setAttribute('data-theme', 'dark');
+      if (settings.theme === "Dark") {
+        root.classList.add("dark");
+        body.classList.add("dark");
+        root.setAttribute("data-theme", "dark");
       } else {
-        root.classList.add('light');
-        body.classList.add('light');
-        root.setAttribute('data-theme', 'light');
+        root.classList.add("light");
+        body.classList.add("light");
+        root.setAttribute("data-theme", "light");
       }
     }
   }, []);
@@ -55,74 +59,76 @@ const Settings = () => {
     const body = document.body;
 
     // Force remove and add theme classes for reliable switching
-    root.classList.remove('light', 'dark');
-    body.classList.remove('light', 'dark');
+    root.classList.remove("light", "dark");
+    body.classList.remove("light", "dark");
 
     // Apply theme to both html and body elements
-    if (appearanceData.theme === 'Dark') {
-      root.classList.add('dark');
-      body.classList.add('dark');
-      root.setAttribute('data-theme', 'dark');
+    if (appearanceData.theme === "Dark") {
+      root.classList.add("dark");
+      body.classList.add("dark");
+      root.setAttribute("data-theme", "dark");
     } else {
-      root.classList.add('light');
-      body.classList.add('light');
-      root.setAttribute('data-theme', 'light');
+      root.classList.add("light");
+      body.classList.add("light");
+      root.setAttribute("data-theme", "light");
     }
 
     // Apply font
-    let fontFamily = 'Inter, system-ui, -apple-system, sans-serif';
+    let fontFamily = "Inter, system-ui, -apple-system, sans-serif";
     switch (appearanceData.font) {
-      case 'Roboto':
-        fontFamily = 'Roboto, sans-serif';
+      case "Roboto":
+        fontFamily = "Roboto, sans-serif";
         break;
-      case 'Arial':
-        fontFamily = 'Arial, sans-serif';
+      case "Arial":
+        fontFamily = "Arial, sans-serif";
         break;
-      case 'Helvetica':
-        fontFamily = 'Helvetica, Arial, sans-serif';
+      case "Helvetica":
+        fontFamily = "Helvetica, Arial, sans-serif";
         break;
-      case 'Open Sans':
-        fontFamily = 'Open Sans, sans-serif';
+      case "Open Sans":
+        fontFamily = "Open Sans, sans-serif";
         break;
-      case 'Lato':
-        fontFamily = 'Lato, sans-serif';
+      case "Lato":
+        fontFamily = "Lato, sans-serif";
         break;
       default:
-        fontFamily = 'Inter, system-ui, -apple-system, sans-serif';
+        fontFamily = "Inter, system-ui, -apple-system, sans-serif";
     }
-    root.style.setProperty('--font-family', fontFamily);
+    root.style.setProperty("--font-family", fontFamily);
     body.style.fontFamily = fontFamily;
 
     // Apply font size
-    let fontSize = '16px';
+    let fontSize = "16px";
     switch (appearanceData.fontSize) {
-      case 'Small':
-        fontSize = '14px';
+      case "Small":
+        fontSize = "14px";
         break;
-      case 'Medium':
-        fontSize = '16px';
+      case "Medium":
+        fontSize = "16px";
         break;
-      case 'Large':
-        fontSize = '18px';
+      case "Large":
+        fontSize = "18px";
         break;
-      case 'Extra Large':
-        fontSize = '20px';
+      case "Extra Large":
+        fontSize = "20px";
         break;
     }
-    root.style.setProperty('--base-font-size', fontSize);
+    root.style.setProperty("--base-font-size", fontSize);
     body.style.fontSize = fontSize;
 
-    console.log(`Theme applied: ${appearanceData.theme}, Font: ${appearanceData.font}, Size: ${appearanceData.fontSize}`);
+    console.log(
+      `Theme applied: ${appearanceData.theme}, Font: ${appearanceData.font}, Size: ${appearanceData.fontSize}`,
+    );
   };
 
   const handleAccountSave = () => {
     // Handle account save logic
-    console.log('Saving account data:', accountData);
+    console.log("Saving account data:", accountData);
   };
 
   const handleAppearanceSave = () => {
     // Save to localStorage
-    localStorage.setItem('appearanceSettings', JSON.stringify(appearanceData));
+    localStorage.setItem("appearanceSettings", JSON.stringify(appearanceData));
 
     // Apply the settings immediately
     applyAppearanceSettings();
@@ -137,17 +143,19 @@ const Settings = () => {
     }, 100);
 
     // Dispatch custom event to notify other components
-    window.dispatchEvent(new CustomEvent('themeChanged', {
-      detail: {
-        theme: appearanceData.theme,
-        font: appearanceData.font,
-        fontSize: appearanceData.fontSize
-      }
-    }));
+    window.dispatchEvent(
+      new CustomEvent("themeChanged", {
+        detail: {
+          theme: appearanceData.theme,
+          font: appearanceData.font,
+          fontSize: appearanceData.fontSize,
+        },
+      }),
+    );
 
     // Settings applied successfully (no text change needed)
 
-    console.log('Appearance settings saved and applied:', appearanceData);
+    console.log("Appearance settings saved and applied:", appearanceData);
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -183,9 +191,10 @@ const Settings = () => {
                 onClick={() => setActiveTab(tab.id)}
                 className={`
                   flex items-center space-x-2 px-4 py-2 rounded-md font-medium transition-colors
-                  ${activeTab === tab.id 
-                    ? 'bg-background text-foreground shadow-sm' 
-                    : 'text-muted-foreground hover:text-foreground'
+                  ${
+                    activeTab === tab.id
+                      ? "bg-background text-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
                   }
                 `}
               >
@@ -197,10 +206,12 @@ const Settings = () => {
         </div>
 
         {/* Tab Content */}
-        {activeTab === 'account' && (
+        {activeTab === "account" && (
           <div className="medical-card p-6">
             <div className="mb-6">
-              <h2 className="text-lg font-semibold text-foreground mb-2">Account</h2>
+              <h2 className="text-lg font-semibold text-foreground mb-2">
+                Account
+              </h2>
               <p className="text-sm text-muted-foreground">
                 Manage your account settings and email preferences.
               </p>
@@ -215,7 +226,11 @@ const Settings = () => {
                 <div className="flex items-center space-x-4">
                   <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center overflow-hidden">
                     {profileImage ? (
-                      <img src={profileImage} alt="Profile" className="w-full h-full object-cover" />
+                      <img
+                        src={profileImage}
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
                     ) : (
                       <User className="w-8 h-8 text-muted-foreground" />
                     )}
@@ -240,7 +255,8 @@ const Settings = () => {
                       </button>
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      Upload a photo to personalize your profile. JPG, PNG or GIF (max 5MB).
+                      Upload a photo to personalize your profile. JPG, PNG or
+                      GIF (max 5MB).
                     </p>
                   </div>
                 </div>
@@ -254,7 +270,9 @@ const Settings = () => {
                 <input
                   type="text"
                   value={accountData.name}
-                  onChange={(e) => setAccountData({ ...accountData, name: e.target.value })}
+                  onChange={(e) =>
+                    setAccountData({ ...accountData, name: e.target.value })
+                  }
                   className="w-full px-4 py-3 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-medical-blue focus:border-transparent"
                 />
                 <p className="text-xs text-muted-foreground mt-1">
@@ -270,7 +288,9 @@ const Settings = () => {
                 <input
                   type="email"
                   value={accountData.email}
-                  onChange={(e) => setAccountData({ ...accountData, email: e.target.value })}
+                  onChange={(e) =>
+                    setAccountData({ ...accountData, email: e.target.value })
+                  }
                   className="w-full px-4 py-3 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-medical-blue focus:border-transparent"
                 />
                 <p className="text-xs text-muted-foreground mt-1">
@@ -290,10 +310,12 @@ const Settings = () => {
           </div>
         )}
 
-        {activeTab === 'appearance' && (
+        {activeTab === "appearance" && (
           <div className="medical-card p-6">
             <div className="mb-6">
-              <h2 className="text-lg font-semibold text-foreground mb-2">Appearance</h2>
+              <h2 className="text-lg font-semibold text-foreground mb-2">
+                Appearance
+              </h2>
               <p className="text-sm text-muted-foreground">
                 Customize the look and feel of this application.
               </p>
@@ -307,7 +329,12 @@ const Settings = () => {
                 </label>
                 <select
                   value={appearanceData.font}
-                  onChange={(e) => setAppearanceData({ ...appearanceData, font: e.target.value })}
+                  onChange={(e) =>
+                    setAppearanceData({
+                      ...appearanceData,
+                      font: e.target.value,
+                    })
+                  }
                   className="w-full px-4 py-3 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-medical-blue focus:border-transparent"
                 >
                   <option value="Inter">Inter (Default)</option>
@@ -329,7 +356,12 @@ const Settings = () => {
                 </label>
                 <select
                   value={appearanceData.fontSize}
-                  onChange={(e) => setAppearanceData({ ...appearanceData, fontSize: e.target.value })}
+                  onChange={(e) =>
+                    setAppearanceData({
+                      ...appearanceData,
+                      fontSize: e.target.value,
+                    })
+                  }
                   className="w-full px-4 py-3 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-medical-blue focus:border-transparent"
                 >
                   <option value="Small">Small (14px)</option>
@@ -348,15 +380,21 @@ const Settings = () => {
                   Theme
                 </label>
                 <div className="space-y-3">
-                  {['Light', 'Dark'].map((theme) => (
-                    <label key={theme} className="flex items-center space-x-3 cursor-pointer">
+                  {["Light", "Dark"].map((theme) => (
+                    <label
+                      key={theme}
+                      className="flex items-center space-x-3 cursor-pointer"
+                    >
                       <input
                         type="radio"
                         name="theme"
                         value={theme}
                         checked={appearanceData.theme === theme}
                         onChange={(e) => {
-                          const newAppearanceData = { ...appearanceData, theme: e.target.value };
+                          const newAppearanceData = {
+                            ...appearanceData,
+                            theme: e.target.value,
+                          };
                           setAppearanceData(newAppearanceData);
                           // Theme will only change when "Update Appearance" button is clicked
                         }}
@@ -373,25 +411,46 @@ const Settings = () => {
 
               {/* Preview Section */}
               <div className="p-4 border border-border rounded-lg bg-muted/30">
-                <h4 className="text-sm font-medium text-foreground mb-2">Preview</h4>
+                <h4 className="text-sm font-medium text-foreground mb-2">
+                  Preview
+                </h4>
                 <div
                   className="text-foreground"
                   style={{
-                    fontFamily: appearanceData.font === 'Inter' ? 'Inter, system-ui, -apple-system, sans-serif' :
-                               appearanceData.font === 'Roboto' ? 'Roboto, sans-serif' :
-                               appearanceData.font === 'Open Sans' ? 'Open Sans, sans-serif' :
-                               appearanceData.font === 'Lato' ? 'Lato, sans-serif' :
-                               appearanceData.font === 'Arial' ? 'Arial, sans-serif' :
-                               appearanceData.font === 'Helvetica' ? 'Helvetica, Arial, sans-serif' :
-                               'Inter, system-ui, -apple-system, sans-serif',
-                    fontSize: appearanceData.fontSize === 'Small' ? '14px' :
-                             appearanceData.fontSize === 'Medium' ? '16px' :
-                             appearanceData.fontSize === 'Large' ? '18px' :
-                             appearanceData.fontSize === 'Extra Large' ? '20px' : '16px'
+                    fontFamily:
+                      appearanceData.font === "Inter"
+                        ? "Inter, system-ui, -apple-system, sans-serif"
+                        : appearanceData.font === "Roboto"
+                          ? "Roboto, sans-serif"
+                          : appearanceData.font === "Open Sans"
+                            ? "Open Sans, sans-serif"
+                            : appearanceData.font === "Lato"
+                              ? "Lato, sans-serif"
+                              : appearanceData.font === "Arial"
+                                ? "Arial, sans-serif"
+                                : appearanceData.font === "Helvetica"
+                                  ? "Helvetica, Arial, sans-serif"
+                                  : "Inter, system-ui, -apple-system, sans-serif",
+                    fontSize:
+                      appearanceData.fontSize === "Small"
+                        ? "14px"
+                        : appearanceData.fontSize === "Medium"
+                          ? "16px"
+                          : appearanceData.fontSize === "Large"
+                            ? "18px"
+                            : appearanceData.fontSize === "Extra Large"
+                              ? "20px"
+                              : "16px",
                   }}
                 >
-                  <p className="mb-2">This is how your text will appear with the selected font and size.</p>
-                  <p className="text-muted-foreground">Secondary text in {appearanceData.theme.toLowerCase()} theme.</p>
+                  <p className="mb-2">
+                    This is how your text will appear with the selected font and
+                    size.
+                  </p>
+                  <p className="text-muted-foreground">
+                    Secondary text in {appearanceData.theme.toLowerCase()}{" "}
+                    theme.
+                  </p>
                 </div>
               </div>
 
