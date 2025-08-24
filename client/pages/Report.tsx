@@ -670,8 +670,8 @@ const Report = () => {
                 </div>
 
                 {/* Slice Number Display - Top Right */}
-                <div className="absolute top-4 right-4">
-                  <div className="bg-black/70 text-white px-3 py-1 rounded text-sm font-mono">
+                <div className="absolute top-2 right-2">
+                  <div className="bg-black/70 text-white px-2 py-1 rounded text-xs font-mono">
                     Slice {currentSlice}/{totalSlices}
                   </div>
                 </div>
