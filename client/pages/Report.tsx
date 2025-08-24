@@ -613,7 +613,7 @@ const Report = () => {
                       <div className="text-center">
                         {/* MRI Image Placeholder - Fixed Position with Zoom and Rotation */}
                         <div
-                          className="w-96 h-96 bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg flex items-center justify-center border border-border shadow-inner transition-transform duration-300"
+                          className="w-full h-full bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg flex items-center justify-center border border-border shadow-inner transition-transform duration-300"
                           style={{
                             transform: `scale(${zoomLevel}) rotate(${rotation}deg)`,
                             filter: `brightness(${brightness}%) contrast(${contrast}%)`,
