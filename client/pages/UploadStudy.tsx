@@ -113,8 +113,8 @@ const UploadStudy = () => {
 
     localStorage.setItem(`metadata_${patientId}`, JSON.stringify(metadata));
 
-    // Auto-open DICOM viewer instead of going to report page
-    navigate(`/dicom-viewer/${patientId}`);
+    // Navigate to report page after upload
+    navigate(`/report/${patientId}`);
   };
 
   return (
