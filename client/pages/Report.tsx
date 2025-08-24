@@ -606,8 +606,8 @@ const Report = () => {
                 }}
               >
                 {/* DICOM Image Area - Fixed container */}
-                <div className="absolute inset-4 flex items-center justify-center">
-                  <div className="relative w-96 h-96">
+                <div className="absolute inset-3 flex items-center justify-center">
+                  <div className="relative w-full h-full max-w-80 max-h-80">
                     {/* Fixed DICOM Image */}
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
                       <div className="text-center">
