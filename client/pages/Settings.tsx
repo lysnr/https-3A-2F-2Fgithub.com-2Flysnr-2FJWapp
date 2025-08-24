@@ -28,6 +28,31 @@ const Settings = () => {
     applyAppearanceSettings();
   }, [appearanceData]);
 
+  // Initialize theme on component mount
+  useEffect(() => {
+    // Load saved settings and apply immediately
+    const saved = localStorage.getItem('appearanceSettings');
+    if (saved) {
+      const settings = JSON.parse(saved);
+      // Apply theme immediately on load
+      const root = document.documentElement;
+      const body = document.body;
+
+      root.classList.remove('light', 'dark');
+      body.classList.remove('light', 'dark');
+
+      if (settings.theme === 'Dark') {
+        root.classList.add('dark');
+        body.classList.add('dark');
+        root.setAttribute('data-theme', 'dark');
+      } else {
+        root.classList.add('light');
+        body.classList.add('light');
+        root.setAttribute('data-theme', 'light');
+      }
+    }
+  }, []);
+
   const applyAppearanceSettings = () => {
     const root = document.documentElement;
     const body = document.body;
