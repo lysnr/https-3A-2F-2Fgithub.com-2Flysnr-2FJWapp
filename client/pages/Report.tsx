@@ -677,22 +677,13 @@ const Report = () => {
                 </div>
 
                 {/* Patient Info - Bottom Left */}
-                <div className="absolute bottom-4 left-4">
-                  <div className="text-sm text-muted-foreground bg-card/90 backdrop-blur px-3 py-2 rounded border border-border">
-                    {(currentPatient || studyData) && (
-                      <div>
-                        <div className="font-medium text-foreground">
-                          {currentPatient?.name ||
-                            studyData?.patientName ||
-                            "Unknown Patient"}
-                        </div>
-                        {studyData?.studyDescription && (
-                          <div className="text-xs mt-1">
-                            {studyData?.studyDescription}
-                          </div>
-                        )}
-                      </div>
-                    )}
+                <div className="absolute bottom-2 left-2">
+                  <div className="text-xs text-muted-foreground bg-card/90 backdrop-blur px-2 py-1 rounded border border-border">
+                    <div className="font-medium text-foreground text-xs">
+                      {currentPatient?.name ||
+                        studyData?.patientName ||
+                        "Jane Doe"}
+                    </div>
                   </div>
                 </div>
               </div>
